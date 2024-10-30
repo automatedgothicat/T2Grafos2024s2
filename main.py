@@ -1,23 +1,20 @@
 import networkx as nx
+import pandas as pd 
 
-# Dados de exemplo: uma lista de filmes com seus gêneros
-filmes = {
-    "Filme A": ["Ação", "Aventura"],
-    "Filme B": ["Ação", "Comédia"],
-    "Filme C": ["Drama"],
-    "Filme D": ["Aventura", "Fantasia"],
-    "Filme E": ["Comédia", "Romance"],
-    "Filme F": ["Ação", "Fantasia"],
-}
+caminho_csv = 'marvel.csv'
+df = pd.read_csv(caminho_csv)
 
 # Criar um grafo
 grafo = nx.Graph()
+filmes = {}
 
-# Adicionar nós ao grafo
-for filme, generos in filmes.items():
-    grafo.add_node(filme, generos=generos)
+for _, row in df.iterrows():
+    titulo = row["Título"]
+    generos = row["Gênero"].split(", ")
+    grafo.add_node(titulo, gênero=generos, descrição=row["Descrição"])
+    filmes[titulo] = generos
 
-# Adicionar arestas com base na similaridade de gêneros
+# Calcular similaridade entre filmes e adicionar arestas ao grafo
 for filme1, generos1 in filmes.items():
     for filme2, generos2 in filmes.items():
         if filme1 != filme2:
@@ -28,17 +25,20 @@ for filme1, generos1 in filmes.items():
                 grafo.add_edge(filme1, filme2, weight=similaridade)
 
 # Função para recomendar filmes com base em um filme de entrada
-def recomendar_filmes(grafo, filme_base, top_n=3):
-    if filme_base not in grafo:
-        print("O filme não está no grafo.")
+def recomendar_filmes(grafo, filme, limite_similaridade=1):
+    if filme not in grafo:
+        print(f"{filme} não está no grafo.")
         return []
-
-    # Obter filmes conectados ao filme base, ordenados por peso da aresta (similaridade)
-    conexoes = sorted(grafo[filme_base].items(), key=lambda x: x[1]['weight'], reverse=True)
-    recomendacoes = [filme for filme, _ in conexoes[:top_n]]
+    
+    recomendacoes = [
+        (vizinho, peso) 
+        for vizinho, peso in grafo[filme].items()
+        if peso['weight'] >= limite_similaridade
+    ]
+    recomendacoes.sort(key=lambda x: x[1]['weight'], reverse=True)
+    
     return recomendacoes
 
-# Testar o sistema de recomendação
-filme_base = "Filme A"
-recomendacoes = recomendar_filmes(grafo, filme_base)
-print(f"Recomendações para {filme_base}: {recomendacoes}")
+name = input("Escolha um filme pra ver recomendações: ")
+recomendacoes = recomendar_filmes(grafo, name, limite_similaridade=1)
+print("Recomendações para " + name + ":", recomendacoes)
