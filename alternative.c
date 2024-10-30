@@ -7,7 +7,7 @@
 
 // declaração structs
 typedef struct {
-    int vert;
+    int vert; 
     int peso;
     struct aresta *proxVertice;
 } aresta;
@@ -156,8 +156,7 @@ aresta *criaAresta(int vertice, int peso){
 }
 
 bool ligarAresta(grafo *g, int vertOrigem, int vertFim, int peso){
-    if(!g)
-        return false;
+    if(!g) return false;
     
     aresta *nova = criaAresta(vertFim,peso);
     nova->proxVertice = g->adj[vertOrigem].cab;
