@@ -96,7 +96,7 @@ print(f"Recomendações para {titulo_valido}:", recomendacoes)
 # ------------------------------------------
 
 # Parâmetros de estilo para a visualização
-""" dark = {
+dark = {
     'node_color': 'black',
     'font_color': 'white',
     'edge_color': 'gray',
@@ -105,12 +105,20 @@ print(f"Recomendações para {titulo_valido}:", recomendacoes)
     'width': 0.5
 }
 
+highlight = {
+    'node_color': 'red',
+    'node_size': 1200,
+}
+
 # Gerar layout para o grafo
 pos = nx.spring_layout(grafo, k=0.3, seed=42)  # k controla a distância entre os nós
 
-# Visualizar o grafo com um layout melhorado e rótulos mais legíveis
+# Visualizar o grafo com todos os nós em preto
 plt.figure(figsize=(14, 8))
 nx.draw(grafo, pos, with_labels=False, **dark)
+
+# Destacar o nó do filme escolhido pelo usuário em vermelho
+nx.draw_networkx_nodes(grafo, pos, nodelist=[titulo_valido], **highlight)
 
 # Adicionar rótulos com um fundo para melhorar a legibilidade
 labels = {node: node for node in grafo.nodes()}
@@ -118,4 +126,4 @@ nx.draw_networkx_labels(grafo, pos, labels=labels, font_size=10, font_color='whi
                         bbox=dict(facecolor='black', edgecolor='none', boxstyle='round,pad=0.3'))
 
 plt.title("Grafo de Filmes com Similaridade nas Descrições")
-plt.show() """
+plt.show()
