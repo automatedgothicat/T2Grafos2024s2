@@ -17,9 +17,9 @@ filmes = {}
 descricoes = {}
 
 for _, row in df.iterrows():
-    titulo = row["title"]
+    titulo = row["Título"]
     generos = row["Gênero"].split(", ")
-    descricao = row["description"]
+    descricao = row["Descrição"]
     grafo.add_node(titulo, gênero=generos, descrição=descricao)
     filmes[titulo] = generos
     descricoes[titulo] = descricao
