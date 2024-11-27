@@ -45,8 +45,12 @@ def recomendar_filmes(titulo, df, grafo, top_n=5):
     return semelhantes[:top_n]
 
 titulo = input("Insira o titulo de um filme em inglês disponível no disney plus: ")
-rec = recomendar_filmes(titulo,filmes,grafo)
-print(rec)
+while titulo not in df['title'].values:
+    print(f"Desculpe, o título '{titulo}' não foi encontrado no catálogo. Verifique a ortografia e tente novamente.")
+    titulo = input("Insira o título de um filme em inglês disponível no Disney Plus: ")
+
+rec = recomendar_filmes(titulo, filmes, grafo)
+print(f"Filmes recomendados baseados em '{titulo}': {rec}")
 
 # ---------------------------------------------------------
 
