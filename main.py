@@ -4,8 +4,11 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+# check: https://github.com/dedeco/dijkstra-bellman-ford/tree/master
+# livro: https://computerscience360.wordpress.com/wp-content/uploads/2018/02/algoritmos-teoria-e-prc3a1tica-3ed-thomas-cormen.pdf
+
 # Carregar dados do CSV
-caminho_csv = 'marvel.csv'
+caminho_csv = 'disney_plus_titles.csv'
 df = pd.read_csv(caminho_csv)
 
 # Criar um grafo
@@ -14,9 +17,9 @@ filmes = {}
 descricoes = {}
 
 for _, row in df.iterrows():
-    titulo = row["Título"]
+    titulo = row["title"]
     generos = row["Gênero"].split(", ")
-    descricao = row["Descrição"]
+    descricao = row["description"]
     grafo.add_node(titulo, gênero=generos, descrição=descricao)
     filmes[titulo] = generos
     descricoes[titulo] = descricao
