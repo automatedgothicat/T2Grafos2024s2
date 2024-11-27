@@ -7,8 +7,8 @@ Dentro do diretório do projeto, há dois arquivos python. O primeiro, main.py, 
 Atenção! Há duas visualizações do grafo, mesmo após a primeira aparecer, o programa leva alguns segundos para carregar a segunda.
 
 Resultado ao pesquisar pelo filme 'Finding Nemo'
-![alt text](media/image.png)
+![alt text](media/subgrafo.png)
 Essa é uma visualização do filme e seus vértices vizinhos, feita para uma melhor compreensão do grafo. Há também, a visualização do grafo completo, mas que devido ao tamanho do grafo, os vértices se sobrepõe, tornando a imagem confusa. 
 
 Visualização do grafo completo:
-![alt text](image.png)
+![alt text](media/grafo.png)
