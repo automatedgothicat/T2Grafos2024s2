@@ -1,1 +1,3 @@
 Trabalho para a disciplina de Teoria dos Grafos.
+
+Dentro do diretório do projeto, há dois arquivos python. O primeiro, main.py, foi feito antes da disponibilização dos materiais para o trabalho, baseado nas descrições do que deveria ser feito em aula. O segundo, recfilmes.py, foi feito após o recebeminto do pdf e csv, sendo feito com base no arquivo anterior, mas com adaptações para se adequar aos requisitos do trabalho. As principais alterações dizem respeito a leitura do csv e a adição da lógica de clusters, inexistente no primeiro.
